@@ -12,3 +12,9 @@ model Todo {
   title     String
   createdAt DateTime @default(now())
 }
+
+model Page {
+  id        Int      @id @default(autoincrement())
+  url       String   @unique
+  createdAt DateTime @default(now())
+}
