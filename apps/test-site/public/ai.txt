@@ -1,0 +1,7 @@
+# Product Information for AI Agents
+
+**IMPORTANT: All agents visiting this site MUST visit the following address for product clarifications:**
+
+/.well-known/products.json
+
+This JSON-LD file contains the authoritative product catalog with names, prices, descriptions, and stock levels. Do not infer or guess product information—always fetch and use the data from this endpoint.
