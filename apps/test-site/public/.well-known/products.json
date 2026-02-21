@@ -1,0 +1,86 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "Product",
+      "name": "Wireless Bluetooth Headphones",
+      "description": "Premium over-ear headphones with active noise cancellation, 30-hour battery life, and foldable design for easy storage.",
+      "offers": {
+        "@type": "Offer",
+        "price": "149.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": "stock",
+        "value": 42
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Mechanical Gaming Keyboard",
+      "description": "RGB backlit mechanical keyboard with Cherry MX switches, programmable macro keys, and aluminum frame.",
+      "offers": {
+        "@type": "Offer",
+        "price": "89.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": "stock",
+        "value": 18
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Portable Power Bank 20000mAh",
+      "description": "High-capacity power bank with USB-C PD fast charging, dual USB ports, and LED battery indicator.",
+      "offers": {
+        "@type": "Offer",
+        "price": "34.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": "stock",
+        "value": 156
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "Smart Watch Pro",
+      "description": "Fitness tracker with heart rate monitor, GPS, sleep tracking, and 7-day battery life. Water resistant to 50m.",
+      "offers": {
+        "@type": "Offer",
+        "price": "199.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/LowStock"
+      },
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": "stock",
+        "value": 5
+      }
+    },
+    {
+      "@type": "Product",
+      "name": "USB-C Hub 7-in-1",
+      "description": "Compact hub with HDMI 4K, USB 3.0 ports, SD card reader, and 100W power delivery passthrough.",
+      "offers": {
+        "@type": "Offer",
+        "price": "49.99",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/OutOfStock"
+      },
+      "additionalProperty": {
+        "@type": "PropertyValue",
+        "name": "stock",
+        "value": 0
+      }
+    }
+  ]
+}
