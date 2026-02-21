@@ -1,6 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { prisma } from '#/db'
 
+/**
+ * This route is used to track when a user clicks the buy button on a product.
+ * then redirect to the buy url.
+ */ 
 export const Route = createFileRoute('/action/buy/$id')({
   component: () => null,
   server: {
