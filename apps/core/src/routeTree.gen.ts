@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as UrlRouteImport } from './routes/$url'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PagesIndexRouteImport } from './routes/pages/index'
 import { Route as DemoPrismaRouteImport } from './routes/demo/prisma'
@@ -18,10 +19,16 @@ import { Route as DemoBetterAuthRouteImport } from './routes/demo/better-auth'
 import { Route as PagesAddUrlRouteImport } from './routes/pages/add.$url'
 import { Route as DemoApiMcpTodosRouteImport } from './routes/demo/api.mcp-todos'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ActionBuyIdRouteImport } from './routes/action/buy/$id'
 
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UrlRoute = UrlRouteImport.update({
+  id: '/$url',
+  path: '/$url',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -64,25 +71,34 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActionBuyIdRoute = ActionBuyIdRouteImport.update({
+  id: '/action/buy/$id',
+  path: '/action/buy/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$url': typeof UrlRoute
   '/mcp': typeof McpRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/pages/': typeof PagesIndexRoute
+  '/action/buy/$id': typeof ActionBuyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/pages/add/$url': typeof PagesAddUrlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$url': typeof UrlRoute
   '/mcp': typeof McpRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/pages': typeof PagesIndexRoute
+  '/action/buy/$id': typeof ActionBuyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/pages/add/$url': typeof PagesAddUrlRoute
@@ -90,11 +106,13 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$url': typeof UrlRoute
   '/mcp': typeof McpRoute
   '/demo/better-auth': typeof DemoBetterAuthRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/prisma': typeof DemoPrismaRoute
   '/pages/': typeof PagesIndexRoute
+  '/action/buy/$id': typeof ActionBuyIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/pages/add/$url': typeof PagesAddUrlRoute
@@ -103,33 +121,39 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$url'
     | '/mcp'
     | '/demo/better-auth'
     | '/demo/mcp-todos'
     | '/demo/prisma'
     | '/pages/'
+    | '/action/buy/$id'
     | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/pages/add/$url'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$url'
     | '/mcp'
     | '/demo/better-auth'
     | '/demo/mcp-todos'
     | '/demo/prisma'
     | '/pages'
+    | '/action/buy/$id'
     | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/pages/add/$url'
   id:
     | '__root__'
     | '/'
+    | '/$url'
     | '/mcp'
     | '/demo/better-auth'
     | '/demo/mcp-todos'
     | '/demo/prisma'
     | '/pages/'
+    | '/action/buy/$id'
     | '/api/auth/$'
     | '/demo/api/mcp-todos'
     | '/pages/add/$url'
@@ -137,11 +161,13 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UrlRoute: typeof UrlRoute
   McpRoute: typeof McpRoute
   DemoBetterAuthRoute: typeof DemoBetterAuthRoute
   DemoMcpTodosRoute: typeof DemoMcpTodosRoute
   DemoPrismaRoute: typeof DemoPrismaRoute
   PagesIndexRoute: typeof PagesIndexRoute
+  ActionBuyIdRoute: typeof ActionBuyIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   DemoApiMcpTodosRoute: typeof DemoApiMcpTodosRoute
   PagesAddUrlRoute: typeof PagesAddUrlRoute
@@ -154,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$url': {
+      id: '/$url'
+      path: '/$url'
+      fullPath: '/$url'
+      preLoaderRoute: typeof UrlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -212,16 +245,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/action/buy/$id': {
+      id: '/action/buy/$id'
+      path: '/action/buy/$id'
+      fullPath: '/action/buy/$id'
+      preLoaderRoute: typeof ActionBuyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UrlRoute: UrlRoute,
   McpRoute: McpRoute,
   DemoBetterAuthRoute: DemoBetterAuthRoute,
   DemoMcpTodosRoute: DemoMcpTodosRoute,
   DemoPrismaRoute: DemoPrismaRoute,
   PagesIndexRoute: PagesIndexRoute,
+  ActionBuyIdRoute: ActionBuyIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   DemoApiMcpTodosRoute: DemoApiMcpTodosRoute,
   PagesAddUrlRoute: PagesAddUrlRoute,

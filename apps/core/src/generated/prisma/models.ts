@@ -10,4 +10,5 @@
  */
 export type * from './models/Todo.ts'
 export type * from './models/Page.ts'
+export type * from './models/Product.ts'
 export type * from './commonInputTypes.ts'

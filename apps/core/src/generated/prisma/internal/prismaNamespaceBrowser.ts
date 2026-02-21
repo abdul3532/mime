@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Todo: 'Todo',
-  Page: 'Page'
+  Page: 'Page',
+  Product: 'Product'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -87,6 +88,21 @@ export const PageScalarFieldEnum = {
 } as const
 
 export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
+
+
+export const ProductScalarFieldEnum = {
+  id: 'id',
+  pageId: 'pageId',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  currency: 'currency',
+  stock: 'stock',
+  buyUrl: 'buyUrl',
+  createdAt: 'createdAt'
+} as const
+
+export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
 export const SortOrder = {

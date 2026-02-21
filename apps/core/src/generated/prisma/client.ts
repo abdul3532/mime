@@ -49,3 +49,8 @@ export type Todo = Prisma.TodoModel
  * 
  */
 export type Page = Prisma.PageModel
+/**
+ * Model Product
+ * 
+ */
+export type Product = Prisma.ProductModel
