@@ -1,18 +1,62 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useState, type FormEvent } from 'react'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  component: App,
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        const { prisma } = await import('@/db')
+        const body = (await request.json()) as { url?: string }
+        const url = String(body?.url ?? '').trim()
+
+        if (!url) {
+          return Response.json({ error: 'URL is required.' }, { status: 400 })
+        }
+
+        await prisma.page.create({
+          data: {
+            url,
+          },
+        })
+
+        return Response.json({ ok: true })
+      },
+    },
+  },
+})
 
 function App() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [url, setUrl] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    console.log('handleSubmit', url)
     event.preventDefault()
-    const form = event.currentTarget
-    const formData = new FormData(form)
-    const rawUrl = String(formData.get('url') ?? '').trim()
+    const trimmedUrl = url.trim()
+    if (!trimmedUrl || isSubmitting) return
 
-    if (!rawUrl) return
+    try {
+      setIsSubmitting(true)
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({ url: trimmedUrl }),
+      })
 
-    const destination = `/${encodeURIComponent(rawUrl)}`
-    window.location.assign(destination)
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(data?.error ?? 'Failed to crawl page')
+      }
+
+      setUrl('')
+    } catch (error) {
+      console.error('Failed to crawl page', error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -21,8 +65,10 @@ function App() {
       <p>Paste your ecommerce URL and generate an llm.md product page.</p>
       <form onSubmit={handleSubmit}>
         <label htmlFor="url">Ecommerce URL</label>
-        <input id="url" name="url" type="url" placeholder="https://shop.example.com" required />
-        <button type="submit">Crawl</button>
+        <input id="url" name="url" type="url" placeholder="https://shop.example.com" required value={url} onChange={e => setUrl(e.target.value)} />
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Crawling...' : 'Crawl'}
+        </button>
       </form>
     </main>
   )
