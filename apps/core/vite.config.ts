@@ -10,11 +10,11 @@ import tailwindcss from '@tailwindcss/vite'
 const config = defineConfig(() => ({
   server: {},
   plugins: [
-    devtools(),
     tsconfigPaths({ projects: ['./tsconfig.json'] }),
     tailwindcss(),
     tanstackStart(),
     viteReact(),
+    devtools(),
   ],
 }))
 

@@ -261,6 +261,7 @@ export type ProductWhereInput = {
   buyUrl?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -274,6 +275,7 @@ export type ProductOrderByWithRelationInput = {
   buyUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   page?: Prisma.PageOrderByWithRelationInput
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -290,6 +292,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   buyUrl?: Prisma.StringFilter<"Product"> | string
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
   page?: Prisma.XOR<Prisma.PageScalarRelationFilter, Prisma.PageWhereInput>
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventListRelationFilter
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type ProductCreateInput = {
   buyUrl: string
   createdAt?: Date | string
   page: Prisma.PageCreateNestedOneWithoutProductsInput
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type ProductUncheckedCreateInput = {
   stock: number
   buyUrl: string
   createdAt?: Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -356,6 +361,7 @@ export type ProductUpdateInput = {
   buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   page?: Prisma.PageUpdateOneRequiredWithoutProductsNestedInput
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -368,6 +374,7 @@ export type ProductUncheckedUpdateInput = {
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -412,6 +419,11 @@ export type ProductListRelationFilter = {
 
 export type ProductOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ProductScalarRelationFilter = {
+  is?: Prisma.ProductWhereInput
+  isNot?: Prisma.ProductWhereInput
 }
 
 export type ProductCountOrderByAggregateInput = {
@@ -506,6 +518,20 @@ export type ProductUncheckedUpdateManyWithoutPageNestedInput = {
   deleteMany?: Prisma.ProductScalarWhereInput | Prisma.ProductScalarWhereInput[]
 }
 
+export type ProductCreateNestedOneWithoutBuyTriggeredEventsInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedCreateWithoutBuyTriggeredEventsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutBuyTriggeredEventsInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneRequiredWithoutBuyTriggeredEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedCreateWithoutBuyTriggeredEventsInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutBuyTriggeredEventsInput
+  upsert?: Prisma.ProductUpsertWithoutBuyTriggeredEventsInput
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutBuyTriggeredEventsInput, Prisma.ProductUpdateWithoutBuyTriggeredEventsInput>, Prisma.ProductUncheckedUpdateWithoutBuyTriggeredEventsInput>
+}
+
 export type ProductCreateWithoutPageInput = {
   name: string
   description: string
@@ -514,6 +540,7 @@ export type ProductCreateWithoutPageInput = {
   stock: number
   buyUrl: string
   createdAt?: Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutPageInput = {
@@ -525,6 +552,7 @@ export type ProductUncheckedCreateWithoutPageInput = {
   stock: number
   buyUrl: string
   createdAt?: Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutPageInput = {
@@ -568,6 +596,68 @@ export type ProductScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Product"> | Date | string
 }
 
+export type ProductCreateWithoutBuyTriggeredEventsInput = {
+  name: string
+  description: string
+  price: number
+  currency: string
+  stock: number
+  buyUrl: string
+  createdAt?: Date | string
+  page: Prisma.PageCreateNestedOneWithoutProductsInput
+}
+
+export type ProductUncheckedCreateWithoutBuyTriggeredEventsInput = {
+  id?: number
+  pageId: number
+  name: string
+  description: string
+  price: number
+  currency: string
+  stock: number
+  buyUrl: string
+  createdAt?: Date | string
+}
+
+export type ProductCreateOrConnectWithoutBuyTriggeredEventsInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedCreateWithoutBuyTriggeredEventsInput>
+}
+
+export type ProductUpsertWithoutBuyTriggeredEventsInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedUpdateWithoutBuyTriggeredEventsInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedCreateWithoutBuyTriggeredEventsInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutBuyTriggeredEventsInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutBuyTriggeredEventsInput, Prisma.ProductUncheckedUpdateWithoutBuyTriggeredEventsInput>
+}
+
+export type ProductUpdateWithoutBuyTriggeredEventsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  page?: Prisma.PageUpdateOneRequiredWithoutProductsNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutBuyTriggeredEventsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  pageId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type ProductCreateManyPageInput = {
   id?: number
   name: string
@@ -587,6 +677,7 @@ export type ProductUpdateWithoutPageInput = {
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutPageInput = {
@@ -598,6 +689,7 @@ export type ProductUncheckedUpdateWithoutPageInput = {
   stock?: Prisma.IntFieldUpdateOperationsInput | number
   buyUrl?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  buyTriggeredEvents?: Prisma.BuyTriggeredEventUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutPageInput = {
@@ -612,6 +704,35 @@ export type ProductUncheckedUpdateManyWithoutPageInput = {
 }
 
 
+/**
+ * Count Type ProductCountOutputType
+ */
+
+export type ProductCountOutputType = {
+  buyTriggeredEvents: number
+}
+
+export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  buyTriggeredEvents?: boolean | ProductCountOutputTypeCountBuyTriggeredEventsArgs
+}
+
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductCountOutputType
+   */
+  select?: Prisma.ProductCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountBuyTriggeredEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BuyTriggeredEventWhereInput
+}
+
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -624,6 +745,8 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   buyUrl?: boolean
   createdAt?: boolean
   page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  buyTriggeredEvents?: boolean | Prisma.Product$buyTriggeredEventsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
 export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -667,6 +790,8 @@ export type ProductSelectScalar = {
 export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "pageId" | "name" | "description" | "price" | "currency" | "stock" | "buyUrl" | "createdAt", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
+  buyTriggeredEvents?: boolean | Prisma.Product$buyTriggeredEventsArgs<ExtArgs>
+  _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   page?: boolean | Prisma.PageDefaultArgs<ExtArgs>
@@ -679,6 +804,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Product"
   objects: {
     page: Prisma.$PagePayload<ExtArgs>
+    buyTriggeredEvents: Prisma.$BuyTriggeredEventPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1085,6 +1211,7 @@ readonly fields: ProductFieldRefs;
 export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   page<T extends Prisma.PageDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PageDefaultArgs<ExtArgs>>): Prisma.Prisma__PageClient<runtime.Types.Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  buyTriggeredEvents<T extends Prisma.Product$buyTriggeredEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$buyTriggeredEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BuyTriggeredEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1516,6 +1643,30 @@ export type ProductDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Products to delete.
    */
   limit?: number
+}
+
+/**
+ * Product.buyTriggeredEvents
+ */
+export type Product$buyTriggeredEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BuyTriggeredEvent
+   */
+  select?: Prisma.BuyTriggeredEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BuyTriggeredEvent
+   */
+  omit?: Prisma.BuyTriggeredEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BuyTriggeredEventInclude<ExtArgs> | null
+  where?: Prisma.BuyTriggeredEventWhereInput
+  orderBy?: Prisma.BuyTriggeredEventOrderByWithRelationInput | Prisma.BuyTriggeredEventOrderByWithRelationInput[]
+  cursor?: Prisma.BuyTriggeredEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BuyTriggeredEventScalarFieldEnum | Prisma.BuyTriggeredEventScalarFieldEnum[]
 }
 
 /**

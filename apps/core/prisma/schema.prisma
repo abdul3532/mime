@@ -22,6 +22,14 @@ model Page {
   products Product[]
 }
 
+model BuyTriggeredEvent {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  clickedAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id])
+}
+
 model Product {
   id     Int @id @default(autoincrement())
   pageId Int
@@ -35,5 +43,6 @@ model Product {
 
   createdAt DateTime @default(now())
 
-  page Page @relation(fields: [pageId], references: [id])
+  page               Page                @relation(fields: [pageId], references: [id])
+  buyTriggeredEvents BuyTriggeredEvent[]
 }

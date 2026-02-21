@@ -386,6 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Todo: 'Todo',
   Page: 'Page',
+  BuyTriggeredEvent: 'BuyTriggeredEvent',
   Product: 'Product'
 } as const
 
@@ -402,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "todo" | "page" | "product"
+    modelProps: "todo" | "page" | "buyTriggeredEvent" | "product"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -554,6 +555,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BuyTriggeredEvent: {
+      payload: Prisma.$BuyTriggeredEventPayload<ExtArgs>
+      fields: Prisma.BuyTriggeredEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BuyTriggeredEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BuyTriggeredEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        findFirst: {
+          args: Prisma.BuyTriggeredEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BuyTriggeredEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        findMany: {
+          args: Prisma.BuyTriggeredEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>[]
+        }
+        create: {
+          args: Prisma.BuyTriggeredEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        createMany: {
+          args: Prisma.BuyTriggeredEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BuyTriggeredEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>[]
+        }
+        delete: {
+          args: Prisma.BuyTriggeredEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        update: {
+          args: Prisma.BuyTriggeredEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.BuyTriggeredEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BuyTriggeredEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BuyTriggeredEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.BuyTriggeredEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyTriggeredEventPayload>
+        }
+        aggregate: {
+          args: Prisma.BuyTriggeredEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBuyTriggeredEvent>
+        }
+        groupBy: {
+          args: Prisma.BuyTriggeredEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyTriggeredEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BuyTriggeredEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyTriggeredEventCountAggregateOutputType> | number
+        }
+      }
+    }
     Product: {
       payload: Prisma.$ProductPayload<ExtArgs>
       fields: Prisma.ProductFieldRefs
@@ -683,6 +758,15 @@ export const PageScalarFieldEnum = {
 } as const
 
 export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
+
+
+export const BuyTriggeredEventScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  clickedAt: 'clickedAt'
+} as const
+
+export type BuyTriggeredEventScalarFieldEnum = (typeof BuyTriggeredEventScalarFieldEnum)[keyof typeof BuyTriggeredEventScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {
@@ -874,6 +958,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   todo?: Prisma.TodoOmit
   page?: Prisma.PageOmit
+  buyTriggeredEvent?: Prisma.BuyTriggeredEventOmit
   product?: Prisma.ProductOmit
 }
 

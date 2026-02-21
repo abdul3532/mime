@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Todo: 'Todo',
   Page: 'Page',
+  BuyTriggeredEvent: 'BuyTriggeredEvent',
   Product: 'Product'
 } as const
 
@@ -88,6 +89,15 @@ export const PageScalarFieldEnum = {
 } as const
 
 export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
+
+
+export const BuyTriggeredEventScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  clickedAt: 'clickedAt'
+} as const
+
+export type BuyTriggeredEventScalarFieldEnum = (typeof BuyTriggeredEventScalarFieldEnum)[keyof typeof BuyTriggeredEventScalarFieldEnum]
 
 
 export const ProductScalarFieldEnum = {

@@ -28,6 +28,11 @@ export type Todo = Prisma.TodoModel
  */
 export type Page = Prisma.PageModel
 /**
+ * Model BuyTriggeredEvent
+ * 
+ */
+export type BuyTriggeredEvent = Prisma.BuyTriggeredEventModel
+/**
  * Model Product
  * 
  */
