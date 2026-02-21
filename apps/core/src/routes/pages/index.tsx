@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useRouter } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { prisma } from '#/db'
 import { ExternalLink } from 'lucide-react'
@@ -67,25 +67,35 @@ function PagesIndex() {
           {pages.map((page) => (
             <li
               key={page.id}
-              className="flex items-center justify-between p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-cyan-500/50 transition-colors"
+              className="p-4 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-cyan-500/50 transition-colors"
             >
-              <a
-                href={page.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-400 hover:text-cyan-300 truncate flex-1 mr-4"
-              >
-                {page.url}
-              </a>
-              <a
-                href={page.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-cyan-400 transition-colors"
-                aria-label="Open in new tab"
-              >
-                <ExternalLink size={18} />
-              </a>
+              <div className="flex items-center justify-between gap-4">
+                <a
+                  href={page.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-cyan-400 hover:text-cyan-300 truncate flex-1"
+                >
+                  {page.url}
+                </a>
+                <a
+                  href={page.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-gray-400 hover:text-cyan-400 transition-colors"
+                  aria-label="Open source page in new tab"
+                >
+                  <ExternalLink size={18} />
+                </a>
+              </div>
+              <div className="mt-3">
+                <a
+                  href={`/${encodeURIComponent(page.url)}`}
+                  className="inline-flex items-center px-3 py-2 text-sm rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-semibold transition-colors"
+                >
+                  Download llm.md
+                </a>
+              </div>
             </li>
           ))}
           {pages.length === 0 && (

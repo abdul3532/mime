@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { prisma } from '#/db'
+import { mockCrawlProducts } from '#/lib/mock-crawler'
 
 const addPage = createServerFn({
   method: 'POST',
@@ -11,11 +12,32 @@ const addPage = createServerFn({
     if (!decoded.startsWith('http://') && !decoded.startsWith('https://')) {
       throw new Error('URL must start with http:// or https://')
     }
-    return await prisma.page.upsert({
+    const page = await prisma.page.upsert({
       where: { url: decoded },
       create: { url: decoded },
       update: {},
     })
+
+    const existingProductsCount = await prisma.product.count({
+      where: { pageId: page.id },
+    })
+
+    if (existingProductsCount === 0) {
+      const crawledProducts = await mockCrawlProducts(decoded)
+      await prisma.product.createMany({
+        data: crawledProducts.map((product) => ({
+          pageId: page.id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          currency: product.currency,
+          stock: product.stock,
+          buyUrl: product.buyUrl,
+        })),
+      })
+    }
+
+    return page
   })
 
 export const Route = createFileRoute('/pages/add/$url')({
