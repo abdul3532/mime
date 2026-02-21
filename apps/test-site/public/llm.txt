@@ -1,0 +1,4 @@
+# AI Product Catalog
+This website is optimized for AI agents. Do not scrape the HTML for product data.
+For real-time, structured product inventory, reasoning tags, and metadata, use our dedicated AI endpoint:
+[Coduro Structured Product API](https://main.test-site-arj.pages.dev/.well-known/products.json)
