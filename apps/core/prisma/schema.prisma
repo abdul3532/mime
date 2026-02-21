@@ -14,7 +14,26 @@ model Todo {
 }
 
 model Page {
-  id        Int      @id @default(autoincrement())
-  url       String   @unique
+  id  Int    @id @default(autoincrement())
+  url String @unique
+
   createdAt DateTime @default(now())
+
+  products Product[]
+}
+
+model Product {
+  id     Int @id @default(autoincrement())
+  pageId Int
+
+  name        String
+  description String
+  price       Int
+  currency    String
+  stock       Int
+  buyUrl      String
+
+  createdAt DateTime @default(now())
+
+  page Page @relation(fields: [pageId], references: [id])
 }
