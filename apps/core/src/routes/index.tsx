@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useRouter } from '@tanstack/react-router'
 import { useState, type FormEvent } from 'react'
 
 export const Route = createFileRoute('/')({
@@ -14,10 +14,12 @@ export const Route = createFileRoute('/')({
           return Response.json({ error: 'URL is required.' }, { status: 400 })
         }
 
-        await prisma.page.create({
-          data: {
+        await prisma.page.upsert({
+          where: { url },
+          create: {
             url,
           },
+          update: {},
         })
 
         return Response.json({ ok: true })
@@ -27,6 +29,7 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
+  const router = useRouter()
   const [url, setUrl] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -52,6 +55,7 @@ function App() {
       }
 
       setUrl('')
+      router.navigate({ to: '/pages/add/$url', params: { url: trimmedUrl } })
     } catch (error) {
       console.error('Failed to crawl page', error)
     } finally {
